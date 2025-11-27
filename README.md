@@ -13,7 +13,7 @@ This MCP server provides tools and resources for:
 ## Features
 
 ### MCP Resources
-- **Schema Access**: Retrieve complete database schemas as TypeQL
+- **Schema Access**: Retrieve complete database schemas as TypeQL (supports multi-tenancy via database parameter)
 
 ### MCP Tools
 - **Query Execution**: Run and analyze TypeQL queries
@@ -54,7 +54,9 @@ Set the following environment variables. You can either:
 Required variables:
 - `TYPEDB_HOST`: TypeDB server host (default: `localhost`)
 - `TYPEDB_PORT`: TypeDB server port (default: `1729`)
-- `TYPEDB_DATABASE`: Database name to connect to
+
+Optional variables:
+- `TYPEDB_DATABASE`: Default database name (can also be specified per resource request)
 
 Optional variables (only if TypeDB server has authentication enabled):
 - `TYPEDB_USERNAME`: Username for authentication
@@ -139,9 +141,11 @@ pytest tests/
 
 ## MCP Resources Reference
 
-- `schema`: Complete database schema
-- `schema_functions`: All defined functions
-- `schema_types`: All type definitions
+- `schema`: Complete database schema in TypeQL format
+  - URI: `typedb://schema`
+  - Query parameter: `database` (optional) - database name to query
+  - Example: `typedb://schema?database=my_database`
+  - If database parameter is not provided, uses the default from `TYPEDB_DATABASE` environment variable
 
 ## Contributing
 
