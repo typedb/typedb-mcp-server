@@ -105,12 +105,12 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=8001, help="Port for the MCP server (default: 8001)")
     parser.add_argument("--typedb-address", type=str, required=True, help="Address for TypeDB's HTTP port (e.g., http://localhost:8000)")
     parser.add_argument("--typedb-username", type=str, default="admin", help="TypeDB username (default: admin)")
-    parser.add_argument("--password", type=str, default="password", help="TypeDB password (default: password)")
+    parser.add_argument("--typedb-password", type=str, default="password", help="TypeDB password (default: password)")
     
     args = parser.parse_args()
     
     config.TYPEDB_URL = args.typedb_address
     config.TYPEDB_USERNAME = args.typedb_username
-    config.TYPEDB_PASSWORD = args.password
+    config.TYPEDB_PASSWORD = args.typedb_password
     
     mcp.run(transport="http", host="0.0.0.0", port=args.port)
