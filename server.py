@@ -1,6 +1,7 @@
 from fastmcp import FastMCP
 from query import query as execute_query
 from database import list_databases as db_list, create_database as db_create, delete_database as db_delete
+from user import list_users as usr_list, create_user as usr_create, delete_user as usr_delete
 
 mcp = FastMCP(
     "TypeDB MCP Server",
@@ -59,6 +60,43 @@ def database_delete(name: str) -> str:
         Success message
     """
     return db_delete(name)
+
+
+@mcp.tool
+def user_list() -> str:
+    """List all users on the TypeDB server.
+    
+    Returns:
+        JSON string containing list of users
+    """
+    return usr_list()
+
+
+@mcp.tool
+def user_create(username: str, password: str) -> str:
+    """Create a new user on the TypeDB server.
+    
+    Args:
+        username: Username for the new user
+        password: Password for the new user
+    
+    Returns:
+        Success message
+    """
+    return usr_create(username, password)
+
+
+@mcp.tool
+def user_delete(username: str) -> str:
+    """Delete a user from the TypeDB server.
+    
+    Args:
+        username: Username of the user to delete
+    
+    Returns:
+        Success message
+    """
+    return usr_delete(username)
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=8001)
