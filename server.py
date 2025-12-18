@@ -1,4 +1,6 @@
+import argparse
 from fastmcp import FastMCP
+import config
 from query import query as execute_query
 from database import list_databases as db_list, create_database as db_create, delete_database as db_delete
 from user import list_users as usr_list, create_user as usr_create, delete_user as usr_delete
@@ -99,4 +101,16 @@ def user_delete(username: str) -> str:
     return usr_delete(username)
 
 if __name__ == "__main__":
-    mcp.run(transport="http", host="0.0.0.0", port=8001)
+    parser = argparse.ArgumentParser(description="TypeDB MCP Server")
+    parser.add_argument("--port", type=int, default=8001, help="Port for the MCP server (default: 8001)")
+    parser.add_argument("--typedb", type=str, required=True, help="TypeDB server address (e.g., http://localhost:8000)")
+    parser.add_argument("--username", type=str, default="admin", help="TypeDB username (default: admin)")
+    parser.add_argument("--password", type=str, default="password", help="TypeDB password (default: password)")
+    
+    args = parser.parse_args()
+    
+    config.TYPEDB_URL = args.typedb
+    config.TYPEDB_USERNAME = args.username
+    config.TYPEDB_PASSWORD = args.password
+    
+    mcp.run(transport="http", host="0.0.0.0", port=args.port)
