@@ -3,7 +3,7 @@ from query import query as execute_query
 
 mcp = FastMCP(
     "TypeDB MCP Server",
-    description="Provides query capability against a TypeDB server"
+    # description="Provides query capability against a TypeDB server"
 )
 
 @mcp.tool
