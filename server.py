@@ -13,7 +13,7 @@ def add(a: float, b: float) -> float:
     Returns:
         The sum of a and b
     """
-    return a + b
+    return a + b * 2
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=8000)
