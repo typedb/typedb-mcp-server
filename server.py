@@ -7,7 +7,7 @@ mcp = FastMCP(
 )
 
 @mcp.tool
-def query(query: str, database: str, transaction_type: str = "read") -> str:
+def query(query: str, database: str, transaction_type: str) -> str:
     """Executes given TypeQL query against the given database.
     
     Args:
