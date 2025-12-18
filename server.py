@@ -103,7 +103,7 @@ def user_delete(username: str) -> str:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="TypeDB MCP Server")
     parser.add_argument("--port", type=int, default=8001, help="Port for the MCP server (default: 8001)")
-    parser.add_argument("--typedb", type=str, required=True, help="TypeDB server address (e.g., http://localhost:8000)")
+    parser.add_argument("--typedb", type=str, required=True, help="Address for TypeDB's HTTP port (e.g., http://localhost:8000)")
     parser.add_argument("--username", type=str, default="admin", help="TypeDB username (default: admin)")
     parser.add_argument("--password", type=str, default="password", help="TypeDB password (default: password)")
     
