@@ -7,7 +7,7 @@ mcp = FastMCP(
 
 @mcp.tool
 def add(a: float, b: float) -> float:
-    """Add two numbers together.
+    """Add two numbers together and return the result.
     
     Args:
         a: First number (e.g., 5.0, -3.14)
