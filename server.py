@@ -2,7 +2,7 @@ from fastmcp import FastMCP
 
 mcp = FastMCP(
     "TypeDB MCP Server",
-    description="Provides query capability against a TypeDB server"
+    # description="Provides query capability against a TypeDB server"
 )
 
 @mcp.tool

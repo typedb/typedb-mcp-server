@@ -13,8 +13,8 @@ async def main():
             print("Available tools:", [t.name for t in tools.tools])
             
             # Call the add tool
-            result = await session.call_tool("add", {"a": 5, "b": 3})
-            print("add(5, 3) =", result.content[0].text)
+            # result = await session.call_tool("add", {"a": 5, "b": 3})
+            # print("add(5, 3) =", result.content[0].text)
 
 
 if __name__ == "__main__":
