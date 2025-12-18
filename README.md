@@ -10,16 +10,16 @@ An MCP (Model Context Protocol) server that enables AI assistants to interact wi
 
 ## Running the Server
 
-### Using Docker
-
 ```bash
 docker run -p 8001:8001 typedb/typedb-mcp-server:<version> \
-  --typedb-address http://host.docker.internal:8000 \
+  --typedb-address <address> \
   --typedb-username <username> \
   --typedb-password <password>
 ```
 
-On Linux, add `--add-host=host.docker.internal:host-gateway` if TypeDB is running on your host machine.
+If you're running TypeDB server on `localhost`:
+- replace `<address>` with `http://host.docker.internal:8000` instead of `http://localhost:8000`
+- on Linux, add `--add-host=host.docker.internal:host-gateway`
 
 ## Using with Cursor IDE
 
