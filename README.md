@@ -48,3 +48,14 @@ If you're running TypeDB server on `localhost`:
    - "Insert a person with name 'Alice'"
    - "Query all persons in the database"
 
+## Building from Source
+
+Use `podman` or `Docker` to create a Docker image and push it to DockerHub:
+
+```bash
+podman login docker.io
+
+VERSION=$(cat VERSION)
+podman build -t typedb/typedb-mcp-server:$VERSION .
+podman push typedb/typedb-mcp-server:$VERSION
+```
