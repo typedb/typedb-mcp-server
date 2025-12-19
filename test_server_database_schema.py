@@ -5,9 +5,8 @@ from server import mcp
 
 async def main():
     async with Client(mcp) as client:
-        result = await client.call_tool("query", {
-            "query": "match $p isa person;",
-            "database": "test"
+        result = await client.call_tool("database_schema", {
+            "name": "test2"
         })
         print("Result:", result.content[0].text)
 
