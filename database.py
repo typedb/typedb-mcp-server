@@ -38,9 +38,7 @@ def delete_database(name: str) -> str:
 
 def database_schema(name: str) -> str:
     """Get the complete database schema as TypeQL."""
-    print("HEHEHEHHEE")
     token = get_auth_token()
-    print("access token: " + token)
     response = requests.get(
         f"{config.TYPEDB_URL}/v1/databases/{name}/schema",
         headers={"Authorization": f"Bearer {token}"}
