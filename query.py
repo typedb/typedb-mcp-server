@@ -1,6 +1,6 @@
 import requests
 import config
-from common import get_auth_token
+from common import get_auth_token, handle_typedb_response
 
 
 def query(query: str, database: str, transaction_type: str = "read") -> str:
@@ -29,5 +29,5 @@ def query(query: str, database: str, transaction_type: str = "read") -> str:
             "commit": transaction_type in ("write", "schema")
         }
     )
-    response.raise_for_status()
+    handle_typedb_response(response)
     return response.text

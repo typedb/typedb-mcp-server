@@ -1,6 +1,6 @@
 import requests
 import config
-from common import get_auth_token
+from common import get_auth_token, handle_typedb_response
 
 
 def list_users() -> str:
@@ -10,7 +10,7 @@ def list_users() -> str:
         f"{config.TYPEDB_URL}/v1/users",
         headers={"Authorization": f"Bearer {token}"}
     )
-    response.raise_for_status()
+    handle_typedb_response(response)
     return response.text
 
 
@@ -22,7 +22,7 @@ def create_user(username: str, password: str) -> str:
         headers={"Authorization": f"Bearer {token}"},
         json={"password": password}
     )
-    response.raise_for_status()
+    handle_typedb_response(response)
     return f"User '{username}' created successfully"
 
 
@@ -33,5 +33,5 @@ def delete_user(username: str) -> str:
         f"{config.TYPEDB_URL}/v1/users/{username}",
         headers={"Authorization": f"Bearer {token}"}
     )
-    response.raise_for_status()
+    handle_typedb_response(response)
     return f"User '{username}' deleted successfully"
