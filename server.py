@@ -2,7 +2,7 @@ import argparse
 from fastmcp import FastMCP
 import config
 from query import query as execute_query
-from database import list_databases as db_list, create_database as db_create, delete_database as db_delete
+from database import list_databases as db_list, create_database as db_create, delete_database as db_delete, database_schema as db_schema
 from user import list_users as usr_list, create_user as usr_create, delete_user as usr_delete
 
 mcp = FastMCP(
@@ -62,6 +62,19 @@ def database_delete(name: str) -> str:
         Success message
     """
     return db_delete(name)
+
+
+@mcp.tool
+def database_schema(name: str) -> str:
+    """Get the complete database schema as TypeQL.
+    
+    Args:
+        name: Name of the database
+    
+    Returns:
+        Complete schema definition in TypeQL format (or empty string if no schema defined)
+    """
+    return db_schema(name)
 
 
 @mcp.tool

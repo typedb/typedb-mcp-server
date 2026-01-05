@@ -34,3 +34,14 @@ def delete_database(name: str) -> str:
     )
     response.raise_for_status()
     return f"Database '{name}' deleted successfully"
+
+
+def database_schema(name: str) -> str:
+    """Get the complete database schema as TypeQL."""
+    token = get_auth_token()
+    response = requests.get(
+        f"{config.TYPEDB_URL}/v1/databases/{name}/schema",
+        headers={"Authorization": f"Bearer {token}"}
+    )
+    response.raise_for_status()
+    return response.text
