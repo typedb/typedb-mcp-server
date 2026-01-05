@@ -29,32 +29,6 @@ def handle_typedb_response(response: requests.Response) -> None:
         response.raise_for_status()
     except requests.HTTPError as e:
         # Try to extract error details from TypeDB response
-        error_message = f"TypeDB error (HTTP {response.status_code})"
-        
-        try:
-            # TypeDB typically returns JSON error responses
-            error_data = response.json()
-            if isinstance(error_data, dict):
-                # Extract common error fields
-                if "message" in error_data:
-                    error_message = f"TypeDB error: {error_data['message']}"
-                elif "error" in error_data:
-                    error_message = f"TypeDB error: {error_data['error']}"
-                else:
-                    # Include the full error data if available
-                    error_message = f"TypeDB error: {json.dumps(error_data)}"
-            elif isinstance(error_data, str):
-                error_message = f"TypeDB error: {error_data}"
-        except (ValueError, json.JSONDecodeError):
-            # If response is not JSON, try to get text
-            try:
-                error_text = response.text
-                if error_text:
-                    error_message = f"TypeDB error: {error_text}"
-            except Exception:
-                pass  # Fall back to default error message
-        
-        # Create a new HTTPError with the enhanced error message
-        # Preserve the original response object
-        http_error = requests.HTTPError(error_message, response=response)
+        error_data = response.json()
+        http_error = requests.HTTPError(error_data, response=response)
         raise http_error from e
