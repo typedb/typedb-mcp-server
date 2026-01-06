@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  typedb:
+    image: typedb/typedb:3.7.2
+    container_name: typedb-server
+    ports:
+      - "8000:8000"
+    networks:
+      - typedb-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  typedb-mcp-server:
+    image: typedb/typedb-mcp-server:1.0.0-alpha2
+    container_name: typedb-mcp-server
+    ports:
+      - "8001:8001"
+    depends_on:
+      typedb:
+        condition: service_healthy
+    command: 
+      - "--typedb-address"
+      - "http://typedb:8000"
+      - "--typedb-username"
+      - "admin"
+      - "--typedb-password"
+      - "password"
+    networks:
+      - typedb-network
+
+networks:
+  typedb-network:
+    driver: bridge
