@@ -11,7 +11,7 @@ An MCP (Model Context Protocol) server that enables AI assistants to interact wi
 ## Running the Server
 
 ```bash
-docker run -p 8001:8001 typedb/typedb-mcp-server:<version> \
+docker run -p 8001:8001 typedb/typedb-mcp:<version> \
   --typedb-address <address> \
   --typedb-username <username> \
   --typedb-password <password>
@@ -56,6 +56,6 @@ Use `podman` or `Docker` to create a Docker image and push it to DockerHub:
 podman login docker.io
 
 VERSION=<desired version number>
-podman build -t typedb/typedb-mcp-server:$VERSION .
-podman push typedb/typedb-mcp-server:$VERSION
+podman build -t typedb/typedb-mcp:$VERSION .
+podman push typedb/typedb-mcp:$VERSION
 ```
